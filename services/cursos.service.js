@@ -38,4 +38,13 @@ const crearCurso = async (cursoData) => {
     }
 };
 
-export default {crearCurso, borrarCursoPorId, obtenerCursoPorID, obtenerCursos}
+const actualizarCurso = async (id, cursoData) => {
+    try {
+        const cursoActualizado = await CursoModel.findByIdAndUpdate(id, cursoData, { new: true });
+        return cursoActualizado;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export default {crearCurso, actualizarCurso, borrarCursoPorId, obtenerCursoPorID, obtenerCursos}

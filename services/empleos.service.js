@@ -37,8 +37,17 @@ const crearEmpleo = async (empleoData) => {
     }
 };
 
+const actualizarEmpleo = async (id, empleoData) => {
+    try {
+        const empleoActualizado = await EmpleoModel.findByIdAndUpdate(id, empleoData, { new: true });
+        return empleoActualizado;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export default {
-    crearEmpleo,
+    crearEmpleo, actualizarEmpleo,
     borrarEmpleoPorId,
     obtenerEmpleoPorID,
     obtenerEmpleos
