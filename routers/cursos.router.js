@@ -4,10 +4,10 @@ import coursesController from '../controllers/cursos.controller.js'
 
 const router = express.Router();
 
-router.get('/', coursesController.getAllJobs);
-router.get('/:id', coursesController.getJobById);
-router.post('/', coursesController.createJob);
-router.put('/:id', coursesController.updateJob)
-router.delete('/:id', coursesController.deleteJobById);
+router.get('/', coursesController.getAllCourses);
+router.get('/:id', coursesController.getCourseById);
+router.post('/', coursesController.getCourseById);
+router.put('/:id', coursesController.updateCourse)
+router.delete('/:id', coursesController.deleteCourseById);
 
 export default router;
