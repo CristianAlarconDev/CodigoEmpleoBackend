@@ -75,4 +75,18 @@ const updateCourse = async (req, res) => {
     }
 };
 
-export default { createCourse, updateCourse, deleteCourseById, getCourseById, getAllCourses };
+const getCoursesByFilters = async (req, res) => {
+    try {
+        const { pagina, limite, busqueda, ...filtros } = req.query;
+
+        const resultado = await services.obtenerCursosConFiltros(filtros, pagina, limite, busqueda);
+        
+        res.json(resultado);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error al obtener cursos" });
+    }
+};
+
+export default { createCourse, updateCourse, deleteCourseById, getCourseById, getAllCourses, getCoursesByFilters };

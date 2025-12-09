@@ -79,4 +79,23 @@ const updateJob = async (req, res) => {
     }
 };
 
-export default { createJob, updateJob, deleteJobById, getJobById, getAllJobs}
+const getJobsByFilters= async (req, res) => {
+    try {
+    
+        // Ejemplo : /api/empleos?modalidad=Remoto&page=2&limit=5
+        const { pagina, limite, busqueda, ...filtros } = req.query;
+        const resultado = await services.obtenerEmpleosConFiltros(filtros, pagina, limite, busqueda);
+        if(!resultado){
+            res.status(200).json({message:"No hay empleos con esos requisitos"})
+        }
+        res.json(resultado);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error al obtener empleos" });
+    }
+};
+
+
+
+export default { createJob, updateJob, deleteJobById, getJobById, getAllJobs, getJobsByFilters}
