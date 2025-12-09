@@ -1,4 +1,4 @@
-import services from '../services/cursos.service.js'; // Asegúrate de la extensión .js
+import services from '../services/cursos.service.js';
 
 /* MANEJO DE REQUEST Y RESPONSE */
 

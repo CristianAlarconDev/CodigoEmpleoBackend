@@ -1,4 +1,4 @@
-import services from '../services/empleos.service'
+import services from '../services/empleos.service.js'
 
 /*ACA MANEJO LOS REQUEST AND RESPONSE */
 

@@ -1,4 +1,4 @@
-import CursoModel from '../models/cursos.model'
+import CursoModel from '../models/cursos.model.js'
 
 const obtenerCursos= async()=>{
     try {

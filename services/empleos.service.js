@@ -1,4 +1,4 @@
-import EmpleoModel from '../models/Empleo.js'; 
+import EmpleoModel from '../models/empleos.model.js'; 
 
 const obtenerEmpleos = async () => {
     try {
