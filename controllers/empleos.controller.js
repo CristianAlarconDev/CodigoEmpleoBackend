@@ -57,4 +57,26 @@ const createJob = async(req, res) => {
     }
 };
 
-export default { createJob, deleteJobById, getJobById, getAllJobs}
+const updateJob = async (req, res) => {
+    const { id } = req.params;
+    const dataToUpdate = req.body;
+
+    try {
+        const empleoActualizado = await services.actualizarEmpleo(id, dataToUpdate);
+        
+        if (!empleoActualizado) {
+            return res.status(404).json({ message: "No se encontró el empleo para actualizar" });
+        }
+
+        res.json({
+            message: "Empleo actualizado correctamente",
+            curso: empleoActualizado
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error al actualizar el empleo" });
+    }
+};
+
+export default { createJob, updateJob, deleteJobById, getJobById, getAllJobs}

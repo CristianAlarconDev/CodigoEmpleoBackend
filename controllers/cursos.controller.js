@@ -57,4 +57,22 @@ const createCourse = async (req, res) => {
     }
 };
 
-export default { createCourse, deleteCourseById, getCourseById, getAllCourses };
+const updateCourse = async (req, res) => {
+    const { id } = req.params;
+    const dataToUpdate = req.body;
+    try {
+        const cursoActualizado = await services.actualizarCurso(id, dataToUpdate);
+        if (!cursoActualizado) {
+            return res.status(404).json({ message: "No se encontró el curso para actualizar" });
+        }
+        res.json({
+            message: "Curso actualizado correctamente",
+            curso: cursoActualizado
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Error al actualizar el curso" });
+    }
+};
+
+export default { createCourse, updateCourse, deleteCourseById, getCourseById, getAllCourses };
