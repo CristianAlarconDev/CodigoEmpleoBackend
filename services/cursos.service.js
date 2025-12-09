@@ -47,4 +47,46 @@ const actualizarCurso = async (id, cursoData) => {
     }
 };
 
-export default {crearCurso, actualizarCurso, borrarCursoPorId, obtenerCursoPorID, obtenerCursos}
+const obtenerCursosConFiltros = async (filtros = {}, pagina = 1, limite = 10, busqueda = "") => {
+    try {
+        const queryMongo = {};
+        if (filtros.modalidad) {
+            queryMongo.modalidad = { $regex: `^${filtros.modalidad}$`, $options: "i" }; 
+        }
+        if (filtros.categoria) {
+            queryMongo.categoria = { $regex: `^${filtros.categoria}$`, $options: "i" };
+        }
+
+        if (busqueda) {
+            queryMongo.$or = [
+                { titulo: { $regex: busqueda, $options: "i" } },
+                { tecnologias_csv: { $regex: busqueda, $options: "i" } },
+                { autor: { $regex: busqueda, $options: "i" } },
+                { seniority: { $regex: busqueda, $options: "i" } }
+            ];
+        }
+
+        // paginacion y collation
+        const paginaActual = parseInt(pagina) || 1;
+        const limiteParseado = parseInt(limite) || 10;
+        const skip = (paginaActual - 1) * limiteParseado;
+        const opcionesIdioma = { locale: 'es', strength: 1 };
+
+        const [cursos, total] = await Promise.all([
+            CursoModel.find(queryMongo).collation(opcionesIdioma).skip(skip).limit(limiteParseado),
+            CursoModel.countDocuments(queryMongo).collation(opcionesIdioma)
+        ]);
+
+        return {
+            data: cursos,
+            meta: {total,page: paginaActual,limit: limiteParseado,totalPages: Math.ceil(total / limiteParseado)
+
+            }
+        };
+
+    } catch (error) {
+        throw error;
+    }
+};
+
+export default {crearCurso, actualizarCurso, borrarCursoPorId, obtenerCursoPorID, obtenerCursos, obtenerCursosConFiltros}
