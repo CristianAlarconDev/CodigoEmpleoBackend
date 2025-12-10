@@ -1,0 +1,42 @@
+### VARIABLES GLOBALES
+
+@api = http://localhost:process.env.PORT/api
+##Esto no necesita ser un id de firebase real por ahora pero cuando se logueen
+##ya deberia serlo para linkear todo
+@uid_prueba = user_firebase_12345
+# Poner aca ids reales de las colecciones
+@id_curso = 69379cb140817e79fbc34e80 
+@id_empleo = 69379e0d40817e79fbc34ee0 
+
+### CREAR USUARIO (SIMULACION DE LOGIN, SI YA ESTA AVISA Y SI NO LO CREO EN LA COLECCION)
+POST {{api}}/usuarios
+Content-Type: application/json
+
+{
+  "firebase_uid": "{{uid_prueba}}",
+  "email": "test@correo.com",
+  "nombre": "Cristian Developer",
+  "foto": "https://foto.com/perfil.jpg"
+}
+
+### OBTENER PERFIL (DEBERIA DEVOLVER EL PERFIL ACTUALZIADO)
+GET {{api}}/usuarios/{{uid_prueba}}
+
+###  DAR LIKE A UN CURSO (EL TOGGLE DEBERIA AGREGAR)
+POST {{api}}/usuarios/{{uid_prueba}}/favoritos/cursos
+Content-Type: application/json
+
+{
+  "idCurso": "{{id_curso}}"
+}
+
+### POSTULARSE A UN EMPLEO
+POST {{api}}/usuarios/{{uid_prueba}}/postulaciones
+Content-Type: application/json
+
+{
+  "idEmpleo": "{{id_empleo}}"
+}
+
+###  VERIFICAR 
+GET {{api}}/usuarios/{{uid_prueba}}
