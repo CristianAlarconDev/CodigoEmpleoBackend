@@ -4,6 +4,7 @@ import cors from 'cors';
 import connectDB from './src/config/db.js';
 import cursosRoutes from './routers/cursos.router.js';
 import empleosRoutes from './routers/empleos.router.js';
+import usuariosRoutes from './routers/usuarios.router.js'
 
 //CONFIG
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 //RUTAS
 app.use('/api/cursos', cursosRoutes);
 app.use('/api/empleos', empleosRoutes);
+app.use('/api/usuarios', usuariosRoutes);
 /*
 app.get('/', (req, res) => {
     res.send('Hello World!')
