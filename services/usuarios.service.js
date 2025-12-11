@@ -46,6 +46,7 @@ const toggleCursoFavorito = async (uid, idCurso) => {
         }
 
         await usuario.save(); 
+        await usuario.populate('cursos_guardados');
         return usuario.cursos_guardados; // se devuelve la lista actualizada
 
     } catch (error) {
@@ -65,6 +66,7 @@ const toggleEmpleoFavorito = async (uid, idEmpleo) => {
         }
 
         await usuario.save();
+        await usuario.populate('empleos_guardados');
         return usuario.empleos_guardados;
     } catch (error) {
         throw error;
