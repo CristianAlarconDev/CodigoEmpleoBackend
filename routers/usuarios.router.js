@@ -10,8 +10,8 @@ router.put('/:uid', userController.updateUser);
 
 // ACCIONES (Favoritos y Postulaciones)
 // LOS POST PARA LAS ACCIONES QUE VA A EDITAR LOS ARRAY EN LAS COLECCIONES
-router.post('/:uid/favoritos/cursos', userController.toggleCourseFav);
-router.post('/:uid/favoritos/empleos', userController.toggleJobFav);
-router.post('/:uid/postulaciones', userController.postulateToJob);
+router.put('/:uid/favoritos/cursos', userController.toggleCourseFav);
+router.put('/:uid/favoritos/empleos', userController.toggleJobFav);
+router.post('/:uid/postular', userController.postulateToJob);
 
 export default router;
