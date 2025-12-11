@@ -54,7 +54,7 @@ const obtenerCursosConFiltros = async (filtros = {}, pagina = 1, limite = 10, bu
             queryMongo.modalidad = { $regex: `^${filtros.modalidad}$`, $options: "i" }; 
         }
         if (filtros.seniority) {
-            queryMongo.categoria = { $regex: `^${filtros.seniority}$`, $options: "i" };
+            queryMongo.seniority = { $regex: `^${filtros.seniority}$`, $options: "i" };
         }
 
         if (busqueda) {
